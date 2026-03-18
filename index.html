@@ -1,0 +1,248 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Credit Where Credit Is Due</title>
+  <style>
+    :root {
+      --bg: #dbdbdb;
+      --surface: rgba(0, 0, 0, 0.08);
+      --text: #000;
+      --muted: rgba(0, 0, 0, 0.65);
+      --button: rgba(0, 0, 0, 0.1);
+      --button-hover: rgba(0, 0, 0, 0.15);
+      --radius: 14px;
+      --shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+      --shadow-light: 0 6px 18px rgba(0, 0, 0, 0.12);
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      background: var(--bg);
+      color: var(--text);
+      text-rendering: optimizeLegibility;
+    }
+
+    .page {
+      width: min(1100px, 92vw);
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 4rem;
+      align-items: center;
+      padding: 4rem 0;
+    }
+
+    .hero {
+      max-width: 620px;
+    }
+
+    .hero h1 {
+      font-size: clamp(3rem, 5vw + 1.2rem, 4.5rem);
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+      margin: 0;
+    }
+
+    .hero p {
+      margin: 1.8rem 0 0;
+      font-size: 1.25rem;
+      color: var(--muted);
+      max-width: 520px;
+      line-height: 1.5;
+    }
+
+    .actions {
+      display: flex;
+      gap: 2.5rem;
+      justify-content: flex-end;
+      align-items: flex-start;
+      flex-wrap: wrap;
+    }
+
+    .join-group {
+      width: 280px;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      align-items: center;
+    }
+
+    .join-group a {
+      width: 160px;
+      text-align: center;
+    }
+
+    .join-form {
+      display: none;
+      gap: 0.5rem;
+      align-items: center;
+      width: 100%;
+    }
+
+    .join-form.active {
+      display: flex;
+    }
+
+    .join-form input {
+      flex: 1 1 180px;
+      padding: 0.75rem 1rem;
+      border-radius: 999px;
+      border: 1px solid rgba(0, 0, 0, 0.15);
+      background: rgba(255, 255, 255, 0.85);
+      font-size: 0.95rem;
+      outline: none;
+    }
+
+    .join-form input:focus {
+      border-color: rgba(0, 0, 0, 0.35);
+      box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.1);
+    }
+
+    .actions a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.65rem 1.2rem;
+      border-radius: var(--radius);
+      border: 1px solid transparent;
+      background: var(--button);
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      box-shadow: var(--shadow-light);
+      transition: transform 175ms ease, background 175ms ease, box-shadow 175ms ease;
+      min-width: 150px;
+      font-size: 0.9rem;
+    }
+
+    .actions a:hover {
+      background: var(--button-hover);
+      transform: translateY(-1px);
+      box-shadow: var(--shadow);
+    }
+
+    .actions a:active {
+      transform: translateY(0);
+      box-shadow: var(--shadow-light);
+    }
+
+    .join-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      align-items: flex-start;
+    }
+
+    .join-form {
+      display: none;
+      gap: 0.75rem;
+      align-items: center;
+      margin: 0;
+    }
+
+    .join-form.active {
+      display: flex;
+    }
+
+    .join-form input {
+      flex: 1 1 220px;
+      padding: 0.75rem 1rem;
+      border-radius: 999px;
+      border: 1px solid rgba(0, 0, 0, 0.15);
+      background: rgba(255, 255, 255, 0.85);
+      font-size: 0.95rem;
+      outline: none;
+    }
+
+    .join-form input:focus {
+      border-color: rgba(0, 0, 0, 0.35);
+      box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.1);
+    }
+
+    @media (max-width: 720px) {
+      .page {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+        text-align: center;
+      }
+
+      .actions {
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .join-group {
+        width: 100%;
+        max-width: 360px;
+      }
+
+      .actions a {
+        width: 100%;
+        max-width: 320px;
+      }
+
+      .join-form {
+        width: 100%;
+      }
+
+      .join-form input {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <section class="hero">
+      <h1>CREDIT WHERE<br />CREDIT IS DUE</h1>
+      <p>AI platform that ensures fair teamwork and tracks contribution.</p>
+    </section>
+
+    <aside class="actions">
+      <div class="join-group">
+        <a id="join-btn" href="#">Join a Team</a>
+        <div class="join-form" id="joinForm">
+          <input id="teamCode" type="text" placeholder="Enter team code" aria-label="Team code" />
+          <button id="joinSubmit" class="join-submit">Join</button>
+        </div>
+      </div>
+      <a href="create.html">Create a Team</a>
+    </aside>
+  </main>
+
+  <script>
+    const joinBtn = document.getElementById('join-btn');
+    const joinForm = document.getElementById('joinForm');
+    const teamCodeInput = document.getElementById('teamCode');
+
+    joinBtn.addEventListener('click', (event) => {
+      event.preventDefault();
+      joinForm.classList.toggle('active');
+      if (joinForm.classList.contains('active')) {
+        teamCodeInput.focus();
+      }
+    });
+
+    document.getElementById('joinSubmit').addEventListener('click', (event) => {
+      event.preventDefault();
+      const code = teamCodeInput.value.trim();
+      if (!code) {
+        teamCodeInput.focus();
+        return;
+      }
+      window.location.href = `main.html?team=${encodeURIComponent(code)}`;
+    });
+  </script>
+</body>
+</html>
